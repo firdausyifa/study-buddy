@@ -62,10 +62,27 @@
 								</div>
 								<div class="col-xl-6 col-lg-6 col-md-12">
 									<div class="card-body p-md-5 text-black">
-										<h3 class="pb-2 fw-bold" style="color: #011638;">Butuh Bantuan?</h3>
-										<p>Hubungi kami untuk pertanyaan di luar FAQ</p>
+										<h3 class="pb-2 pt-3 fw-bold" style="color: #011638;">Butuh Bantuan?</h3>
+										<p class="mb-5">Hubungi kami untuk pertanyaan di luar FAQ</p>
 										<div class="form-help" id="ff-compose">
-											<script async defer src="https://formfacade.com/include/108672834854760431674/form/1FAIpQLSe3gaPRtq25GFaJZikcAMYD9mBLEzwribKWAM9ax46oqOnlbA/bootstrap.js?div=ff-compose"></script>
+											<form id="contact-form">
+												<div class="input-box">
+													<div class="input-field field mb-3">
+														<label for="name">Nama <span style="color: red;">*</span></label><br>
+														<input type="text" placeholder="Nama Anda" id="name" class="item form-control" autocomplete="off">
+													</div>
+													<div class="input-field field mb-3">
+														<label for="email">Email <span style="color: red;">*</span></label><br>
+														<input type="text" placeholder="Alamat Email" id="email" class="item form-control" autocomplete="off">
+													</div>
+												</div>
+													<div class="textarea-field field mb-3">
+														<label for="message">Pesan <span style="color: red;">*</span></label><br>
+														<textarea name="" id="message" cols="45" rows="5" placeholder="Pesan" class="item form-control" autocomplete="off"></textarea>
+													</div>
+													<button type="submit" class="btn mb-3" style="color: #FAFAFF; background-color: #456990;" onclick="sendMail()">Kirim Pesan</button>
+												</div>
+											</form>
 										</div>
 									</div>
 								</div>
@@ -82,5 +99,41 @@
 			<p>© 2024 Fathiya Syifa Firdausya</p>
 		</div>
 	</footer>
+
+	<!-- EmailJS -->
+	<script type="text/javascript"
+	   src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+	</script>
+	<script type="text/javascript">
+  		(function(){
+			emailjs.init({
+			publicKey: "T0KPi899RVC5xc5hb",
+			});
+		})();
+
+		document.getElementById('contact-form').addEventListener('submit', function(event) {
+		event.preventDefault();
+		var name = document.getElementById("name").value;
+		var email = document.getElementById("email").value;
+		var message = document.getElementById("message").value;
+
+		var templateParams = {
+			from_name: name,
+			email_id: email,
+			message: message
+		};
+		console.log(templateParams)
+		
+		emailjs.send("service_hccti2w", "template_1r8trql", templateParams)
+		.then(function(response) {
+			console.log('SUCCESS!', response.status, response.text);
+			alert('Message sent successfully!');
+		}, function(error) {
+			console.log('FAILED...', error);
+			alert('Message failed to send.');
+		});
+		
+		});
+	</script>
 </body>
 </html>

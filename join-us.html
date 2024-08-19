@@ -34,9 +34,42 @@
 		</ul>
 	</header>
 
-	<main class="container p-5 text-center">
-		<div class="container" id="ff-compose">
-			<script async defer src="https://formfacade.com/include/108672834854760431674/form/1FAIpQLSdiXJRtk3e2QXphu0jUJ7q7461hlePW1GM12NHSSLFkus5VNA/bootstrap.js?div=ff-compose"></script>
+	<main class="container p-5 text-wrap">
+		<div class="container" id="ff-compose" style="max-width: 700px;">
+			<div class="text-wrap gap-5 px-5 lh-base">
+				<h3 class="mb-4">Registrasi Komunitas Study Buddy</h3>
+				<h5 class="mt-4">Halo teman-teman calon anggota!</h5>
+				<p>Kami sangat senang dan bersemangat menyambut Anda ke dalam Komunitas Study Buddy. Di sini, kami percaya bahwa belajar bersama bukan hanya membuat proses pembelajaran menjadi lebih menyenangkan, tetapi juga lebih efektif. Komunitas ini dibentuk untuk membantu setiap anggota mencapai tujuan akademis mereka dengan dukungan dari teman-teman belajar yang berdedikasi dan antusias.</p>
+				<p>Terima kasih atas minat Anda untuk bergabung dengan Komunitas Study Buddy. Kami berharap dapat segera bertemu dan belajar bersama Anda!</p>
+				<p class="pb-3">Salam hangat,<br><strong>Tim Study Buddy</strong></p>
+			</div>
+			<div class="form-admission px-5" id="ff-compose">
+				<form id="admission-form">
+					<div class="input-box">
+						<div class="input-field field mb-3">
+							<label for="fullname">Nama Lengkap <span style="color: red;">*</span></label><br>
+							<input type="text" placeholder="Nama Lengkap" id="fullname" class="item form-control" autocomplete="off">
+						</div>
+						<div class="input-field field mb-3">
+							<label for="phone">Nomor Telepon <span style="color: red;">*</span></label><br>
+							<input type="text" placeholder="Menggunakan 62" id="phone" class="item form-control" autocomplete="off">
+						</div>
+						<div class="input-field field mb-3">
+							<label for="email">Email <span style="color: red;">*</span></label><br>
+							<input type="text" placeholder="Alamat Email" id="email" class="item form-control" autocomplete="off">
+						</div>
+						<div class="input-field field mb-3">
+							<label for="school">Asal Sekolah</label><br>
+							<input type="text" placeholder="Asal Sekolah" id="school" class="item form-control" autocomplete="off">
+						</div>
+						<div class="input-field field mb-3">
+							<label for="topic">Topik yang ingin dibahas</label><br>
+							<input type="text" placeholder="Contoh: Logaritma, Grammar" id="topic" class="item form-control" autocomplete="off">
+						</div>
+						<button type="submit" class="btn mb-3" style="color: #FAFAFF; background-color: #456990;" onclick="sendMail()">Kirim</button>
+					</div>
+				</form>
+			</div>
 		</div>
 	</main>
 
@@ -46,5 +79,45 @@
 			<p>© 2024 Fathiya Syifa Firdausya</p>
 		</div>
 	</footer>
+
+	<!-- EmailJS -->
+	<script type="text/javascript"
+	   src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+	</script>
+	<script type="text/javascript">
+  		(function(){
+			emailjs.init({
+			publicKey: "T0KPi899RVC5xc5hb",
+			});
+		})();
+		
+		document.getElementById('admission-form').addEventListener('submit', function(event) {
+		event.preventDefault();
+		var name = document.getElementById("fullname").value;
+		var phone = document.getElementById("phone").value;
+		var email = document.getElementById("email").value;
+		var school = document.getElementById("school").value;
+		var topic = document.getElementById("topic").value;
+
+		var templateParams = {
+			name: name,
+			phone: phone,
+			email_id: email,
+			school: school,
+			topic: topic
+		};
+		console.log(templateParams)
+		
+		emailjs.send("service_hccti2w", "template_7xqukhh", templateParams)
+		.then(function(response) {
+			console.log('SUCCESS!', response.status, response.text);
+			alert('Message sent successfully!');
+		}, function(error) {
+			console.log('FAILED...', error);
+			alert('Message failed to send.');
+		});
+		
+		});
+	</script>
 </body>
 </html>
