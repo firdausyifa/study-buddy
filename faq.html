@@ -107,7 +107,7 @@
 	<script type="text/javascript">
   		(function(){
 			emailjs.init({
-			publicKey: "T0KPi899RVC5xc5hb",
+			publicKey: "PUBLIC_KEY",
 			});
 		})();
 
@@ -124,7 +124,7 @@
 		};
 		console.log(templateParams)
 		
-		emailjs.send("service_hccti2w", "template_1r8trql", templateParams)
+		emailjs.send("SERVICE_ID", "TEMPLATE_ID", templateParams)
 		.then(function(response) {
 			console.log('SUCCESS!', response.status, response.text);
 			alert('Message sent successfully!');
